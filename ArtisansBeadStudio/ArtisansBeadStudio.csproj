@@ -277,16 +277,22 @@
     <Content Include="Views\Bead\Edit.cshtml" />
     <Content Include="Views\Bead\Error.cshtml" />
     <Content Include="Views\Bead\New.cshtml" />
-    <Content Include="Views\BeadColour\DelectConfirm.cshtml" />
     <Content Include="Views\BeadColour\Details.cshtml" />
     <Content Include="Views\BeadColour\Edit.cshtml" />
     <Content Include="Views\BeadColour\Error.cshtml" />
     <Content Include="Views\BeadColour\List.cshtml" />
     <Content Include="Views\BeadColour\New.cshtml" />
+    <Content Include="Views\Keychain\DeleteConfirm.cshtml" />
+    <Content Include="Views\Keychain\Details.cshtml" />
+    <Content Include="Views\Keychain\Edit.cshtml" />
+    <Content Include="Views\Keychain\Error.cshtml" />
+    <Content Include="Views\Keychain\List.cshtml" />
+    <Content Include="Views\Keychain\New.cshtml" />
+    <Content Include="Views\BeadColour\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Keychain\" />
+    <Folder Include="Content\img\beads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
