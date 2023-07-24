@@ -182,9 +182,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BeadColourController.cs" />
+    <Compile Include="Controllers\BeadColourDataController.cs" />
     <Compile Include="Controllers\BeadController.cs" />
     <Compile Include="Controllers\BeadDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeychainController.cs" />
+    <Compile Include="Controllers\KeychainDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,9 +272,21 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Bead\List.cshtml" />
+    <Content Include="Views\Bead\DeleteConfirm.cshtml" />
+    <Content Include="Views\Bead\Details.cshtml" />
+    <Content Include="Views\Bead\Edit.cshtml" />
+    <Content Include="Views\Bead\Error.cshtml" />
+    <Content Include="Views\Bead\New.cshtml" />
+    <Content Include="Views\BeadColour\DelectConfirm.cshtml" />
+    <Content Include="Views\BeadColour\Details.cshtml" />
+    <Content Include="Views\BeadColour\Edit.cshtml" />
+    <Content Include="Views\BeadColour\Error.cshtml" />
+    <Content Include="Views\BeadColour\List.cshtml" />
+    <Content Include="Views\BeadColour\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Keychain\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
