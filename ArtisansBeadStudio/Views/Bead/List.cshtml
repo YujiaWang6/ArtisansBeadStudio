@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ArtisansBeadStudio.Models.BeadDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Beads</h2>
+<a href="/Bead/New" id="button">New Bead</a>
+@foreach (var bead in Model)
+{
+    <div class="beadContainer">
+        <div>
+            <a href="/Bead/Details/@bead.BeadId"><img src="~/Content/img/beads/@bead.BeadPicture" width="300" /></a>
+        </div>
+        <div>
+            <h2><a href="/Bead/Details/@bead.BeadId">@bead.BeadName</a></h2>
+            <p>Description: @bead.BeadDescription</p>
+            <p>Colour: @bead.ColourName</p>
+            <p>Colour Property: @bead.ColourProperty</p>
+        </div>
+    </div>
+}
+
+<style>
+    .beadContainer {
+        display: flex;
+        margin: 1em 0;
+        gap: 1em;
+    }
+
+    #button {
+        border: solid 2px black;
+        padding: 0.7rem;
+        margin: 2em 0;
+        text-decoration: none;
+        background-color: black;
+        color: #FFEBFA;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+        #button:hover {
+            background-color: #FFEBFA;
+            color: black;
+            border: solid 2px #FFEBFA;
+        }
+</style>
+
