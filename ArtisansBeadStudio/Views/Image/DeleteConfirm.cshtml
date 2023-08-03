@@ -1,0 +1,22 @@
+﻿@model ArtisansBeadStudio.Models.ImageDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+
+<h2>Are you sure you want to delete this Image?</h2>
+<a href="/Image/Details/@Model.ImageID">Cancel</a>
+<form action="/Image/Delete/@Model.ImageID?AlbumId=@Model.AlbumId" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>
+
+

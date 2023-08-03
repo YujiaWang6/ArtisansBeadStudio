@@ -182,14 +182,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\AlbumDataController.cs" />
     <Compile Include="Controllers\BeadColourController.cs" />
     <Compile Include="Controllers\BeadColourDataController.cs" />
     <Compile Include="Controllers\BeadController.cs" />
     <Compile Include="Controllers\BeadDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ImageDataController.cs" />
     <Compile Include="Controllers\KeychainController.cs" />
     <Compile Include="Controllers\KeychainDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StyleController.cs" />
+    <Compile Include="Controllers\StyleDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,17 +207,44 @@
     <Compile Include="Migrations\202307241848465_Bead.designer.cs">
       <DependentUpon>202307241848465_Bead.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308031921122_Images.cs" />
+    <Compile Include="Migrations\202308031921122_Images.designer.cs">
+      <DependentUpon>202308031921122_Images.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308031923169_Styles.cs" />
+    <Compile Include="Migrations\202308031923169_Styles.designer.cs">
+      <DependentUpon>202308031923169_Styles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308031924418_Albums.cs" />
+    <Compile Include="Migrations\202308031924418_Albums.designer.cs">
+      <DependentUpon>202308031924418_Albums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308031926238_Image-Style.cs" />
+    <Compile Include="Migrations\202308031926238_Image-Style.designer.cs">
+      <DependentUpon>202308031926238_Image-Style.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308031927314_Image-Album.cs" />
+    <Compile Include="Migrations\202308031927314_Image-Album.designer.cs">
+      <DependentUpon>202308031927314_Image-Album.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Bead.cs" />
     <Compile Include="Models\BeadColour.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Keychain.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Style.cs" />
     <Compile Include="Models\ViewModels\DetailsBead.cs" />
     <Compile Include="Models\ViewModels\DetailsBeadColour.cs" />
+    <Compile Include="Models\ViewModels\DetailsImages.cs" />
     <Compile Include="Models\ViewModels\DetailsKeychain.cs" />
+    <Compile Include="Models\ViewModels\EditImageDto.cs" />
+    <Compile Include="Models\ViewModels\NewImageDto.cs" />
     <Compile Include="Models\ViewModels\UpdateBead.cs" />
+    <Compile Include="Models\ViewModels\UpdateImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -289,6 +322,15 @@
     <Content Include="Views\Keychain\List.cshtml" />
     <Content Include="Views\Keychain\New.cshtml" />
     <Content Include="Views\BeadColour\DeleteConfirm.cshtml" />
+    <Content Include="Views\Album\List.cshtml" />
+    <Content Include="Views\Image\DeleteConfirm.cshtml" />
+    <Content Include="Views\Image\Details.cshtml" />
+    <Content Include="Views\Image\Edit.cshtml" />
+    <Content Include="Views\Image\error.cshtml" />
+    <Content Include="Views\Image\List.cshtml" />
+    <Content Include="Views\Image\New.cshtml" />
+    <Content Include="Views\Style\Details.cshtml" />
+    <Content Include="Views\Style\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +355,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307241848465_Bead.resx">
       <DependentUpon>202307241848465_Bead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308031921122_Images.resx">
+      <DependentUpon>202308031921122_Images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308031923169_Styles.resx">
+      <DependentUpon>202308031923169_Styles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308031924418_Albums.resx">
+      <DependentUpon>202308031924418_Albums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308031926238_Image-Style.resx">
+      <DependentUpon>202308031926238_Image-Style.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308031927314_Image-Album.resx">
+      <DependentUpon>202308031927314_Image-Album.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

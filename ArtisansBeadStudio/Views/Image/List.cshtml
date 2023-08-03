@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArtisansBeadStudio.Models.ImageDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+
+<a href="/Album/List">Go back to Album-list</a>
+<br />
+<a href="/Image/New?AlbumID=@Request.Url.Segments[3]">New Image</a>
+<h2>List of Images</h2>
+
+@foreach (var image in Model)
+{
+    <h3><a href="/Image/Details/@image.ImageID">@image.ImageTitle</a></h3>
+    <div>Description: @image.ImageDescription</div>
+    <div>Style Name: @image.StyleName</div>
+}

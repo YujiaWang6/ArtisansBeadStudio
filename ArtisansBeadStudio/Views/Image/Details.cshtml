@@ -1,0 +1,23 @@
+﻿@model ArtisansBeadStudio.Models.ViewModels.DetailsImages
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+<a href="/Image/List/@Model.SelectedImage.AlbumId">Go back to Image-list</a>
+<br />
+<a href="/Image/Edit/@Model.SelectedImage.ImageID">Update</a>
+<br />
+<a style="color:#ab2020;" href="/Image/DeleteConfirm/@Model.SelectedImage.ImageID">Delete</a>
+<h2>@Model.SelectedImage.ImageTitle</h2>
+<div>Description: @Model.SelectedImage.ImageDescription</div>
+<div>Style: @Model.SelectedImage.StyleName</div>
+<div><img src="@Model.SelectedImage.ImageData" style="height:40%; width:40%" /></div>

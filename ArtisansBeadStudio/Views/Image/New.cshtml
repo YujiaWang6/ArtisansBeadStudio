@@ -1,0 +1,45 @@
+﻿@model ArtisansBeadStudio.Models.ViewModels.NewImageDto
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+<h2>Create Image</h2>
+<form action="/Image/Create" method="POST" enctype="multipart/form-data">
+    <div>
+        <label>Title:</label> <input type="text" name="ImageTitle" />
+    </div>
+    <div>
+        <label>Description:</label> <input type="text" name="ImageDescription" />
+    </div>
+    <div>
+        <label>Select Style:</label>
+
+        <select name="StyleID">
+            @foreach (var style in @Model.StyleList)
+            {
+                <option value="@style.Key">@style.Value</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Select Image</label> <input type="file" name="ImageData" id="ImageData" accept="image/png, image/jpeg" />
+    </div>
+
+    <input type="hidden" name="AlbumID" value="@Request.QueryString["AlbumID"]">
+    <div>
+        <input type="submit" value="Add Image" />
+
+    </div>
+</form>
+

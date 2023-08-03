@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ArtisansBeadStudio.Models.StyleDto>
+@{
+    ViewBag.Title = "List";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h3 {
+        color: black;
+    }
+
+    h1 {
+        color: black;
+        text-shadow: 1.5px 1.5px white;
+    }
+</style>
+
+<h1>List of Styles</h1>
+<br />
+<div>
+    @foreach (var style in Model)
+    {
+        <h3>@style.StyleName</h3>
+    }
+</div>

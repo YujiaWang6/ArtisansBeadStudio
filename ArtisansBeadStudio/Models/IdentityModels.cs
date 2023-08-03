@@ -29,7 +29,9 @@ namespace ArtisansBeadStudio.Models
         public DbSet<Bead> Beads { get; set; }
         public DbSet<BeadColour> BeadsColours { get; set; }
         public DbSet<Keychain> Keychains { get; set; }
-
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Style> Styles { get; set; }
+        public DbSet<Album> Albums { get; set; }
 
         public static ApplicationDbContext Create()
         {

@@ -1,0 +1,50 @@
+﻿@model ArtisansBeadStudio.Models.ViewModels.EditImageDto
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+
+<h2>Update Image</h2>
+<form action="/Image/Update/@Model.SelectedImage.ImageID" method="POST">
+
+    <input type="hidden" name="ImageID" value="@Model.SelectedImage.ImageID" />
+    <input type="hidden" name="AlbumId" value="@Model.SelectedImage.AlbumId" />
+    <div>
+        <label>Title:</label> <input type="text" name="ImageTitle" value="@Model.SelectedImage.ImageTitle" />
+    </div>
+    <div>
+        <label>Description:</label> <input type="text" name="ImageDescription" value="@Model.SelectedImage.ImageDescription" />
+    </div>
+    <div>
+        <label>Select Style:</label>
+
+        <select name="StyleID">
+            @foreach (var style in Model.StyleList)
+            {
+                string selected = "";
+                if (style.Key == Model.SelectedImage.StyleID)
+                {
+                    selected = "selected";
+                }
+                <option value="@style.Key" @selected>@style.Value</option>
+
+            }
+        </select>
+    </div>
+    <div><img src="@Model.SelectedImage.ImageData" style="height:40%; width:40%" /></div>
+
+    <div>
+        <input type="submit" value="Update Image" />
+
+    </div>
+</form>
+

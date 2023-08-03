@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArtisansBeadStudio.Models.AlbumDto>
+@{
+    ViewBag.Title = "List";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h3 {
+        color: black;
+    }
+
+    h1 {
+        color: black;
+        text-shadow: 1.5px 1.5px white;
+    }
+</style>
+<h1>List of Album</h1>
+<br />
+@foreach (var album in Model)
+{
+    <h3><a href="/Image/List/@album.AlbumID">@album.AlbumName</a></h3>
+}
+
+
