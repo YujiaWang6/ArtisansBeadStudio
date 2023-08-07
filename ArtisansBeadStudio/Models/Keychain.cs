@@ -15,6 +15,9 @@ namespace ArtisansBeadStudio.Models
 
         //A keychain can have many beads
         public ICollection<Bead> Beads { get; set; }
+
+        //A keychain can have many styles
+        public ICollection<Style> Styles { get; set; }
     }
 
     public class KeychainDto

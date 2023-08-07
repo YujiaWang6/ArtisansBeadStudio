@@ -9,6 +9,9 @@ namespace ArtisansBeadStudio.Models
     {
         public int StyleID { get; set; }
         public string StyleName { get; set; }
+
+        //A Style can have many keychains related
+        public ICollection<Keychain> Keychains { get; set; }
     }
     public class StyleDto
     {
