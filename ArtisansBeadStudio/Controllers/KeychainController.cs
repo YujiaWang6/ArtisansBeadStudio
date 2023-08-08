@@ -92,7 +92,44 @@ namespace ArtisansBeadStudio.Controllers
             IEnumerable<BeadDto> beadsInKeychain = response.Content.ReadAsAsync<IEnumerable<BeadDto>>().Result;
             ViewModels.beadsInKeychain = beadsInKeychain;
 
+            //also show all the associated styles with this specific keychain(collaboration)
+            url = "StyleData/ListStylesForKeychain/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StyleDto> associatedStyles = response.Content.ReadAsAsync<IEnumerable<StyleDto>>().Result;
+            ViewModels.associatedStyles = associatedStyles;
+
+            //also show all the aviliable styles(collaboration)
+            url = "StyleData/ListStylesNotIncludeKeychain/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StyleDto> aviliableStyles = response.Content.ReadAsAsync<IEnumerable<StyleDto>>().Result;
+            ViewModels.aviliableStyles = aviliableStyles;
+
             return View(ViewModels);
+        }
+
+
+        //POST: Keychain/Associate/{id}
+        [HttpPost]
+        public ActionResult Associate(int id, int styleid)
+        {
+            string url = "KeychainData/AssociateKeychainWithStyle/" + id + "/" + styleid;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+        //Get: Keychain/Associate/{id}?StyleID={styleid}
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int styleid)
+        {
+            string url = "KeychainData/RemoveKeychainWithStyle/"+id+"/"+styleid;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
         }
 
 

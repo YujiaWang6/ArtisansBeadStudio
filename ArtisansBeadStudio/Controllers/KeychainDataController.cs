@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ArtisansBeadStudio.Migrations;
 using ArtisansBeadStudio.Models;
 
 namespace ArtisansBeadStudio.Controllers
@@ -104,6 +105,76 @@ namespace ArtisansBeadStudio.Controllers
 
             return Ok(KeychainDtos);
         }
+
+
+        /// <summary>
+        /// Associate a particular keychain with a particular style
+        /// </summary>
+        /// <param name="keychainid">The keychain id (primary key)</param>
+        /// <param name="styleid">The style id(primary key)</param>
+        /// <returns>
+        /// HEADER: 200(OK)
+        /// OR
+        /// HEADER: 404(NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/KeychainData/AssociateKeychainWithStyle/{keychainid}/{styleid}
+        /// curl -d "" -v https://localhost:44383/api/KeychainData/AssociateKeychainWithStyle/1/2
+        /// </example>
+        /// (collaboration part) 
+        [HttpPost]
+        [Route("api/KeychainData/AssociateKeychainWithStyle/{keychainid}/{styleid}")]
+        public IHttpActionResult AssociateKeychainWithStyle(int keychainid, int styleid)
+        {
+            Keychain SelectedKeychain = db.Keychains.Include(k=>k.Styles).Where(k=>k.KeychainId== keychainid).FirstOrDefault();
+            Style SelectedStyle = db.Styles.Find(styleid);
+            if (SelectedKeychain==null || SelectedStyle == null)
+            {
+                return NotFound();
+            };
+
+            SelectedKeychain.Styles.Add(SelectedStyle);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+
+
+        /// <summary>
+        /// Remove an association between a particular keychain and a particular style
+        /// </summary>
+        /// <param name="keychainid">The keychain id (primary key)</param>
+        /// <param name="styleid">The style id(primary key)</param>
+        /// <returns>
+        /// HEADER: 200(OK)
+        /// OR
+        /// HEADER: 404(NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/KeychainData/RemoveKeychainWithStyle/{keychainid}/{styleid}
+        /// curl -d "" -v https://localhost:44383/api/KeychainData/RemoveKeychainWithStyle/1/2
+        /// </example>
+        /// (collaboration part) 
+        [HttpPost]
+        [Route("api/KeychainData/RemoveKeychainWithStyle/{keychainid}/{styleid}")]
+        public IHttpActionResult RemoveKeychainWithStyle(int keychainid, int styleid)
+        {
+            Keychain SelectedKeychain = db.Keychains.Include(k => k.Styles).Where(k => k.KeychainId == keychainid).FirstOrDefault();
+            Style SelectedStyle = db.Styles.Find(styleid);
+            if (SelectedKeychain == null || SelectedStyle == null)
+            {
+                return NotFound();
+            };
+
+            SelectedKeychain.Styles.Remove(SelectedStyle);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+
+
 
         /// <summary>
         /// Return the properties of one specific chosen bead in the system

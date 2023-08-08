@@ -33,6 +33,74 @@ namespace ArtisansBeadStudio.Controllers
             return Ok(StyleDtos);
         }
 
+
+        /// <summary>
+        /// Return All the styles contain a specific keychain
+        /// </summary>
+        /// <param name="id">Keychain primary key</param>
+        /// <returns>
+        /// HEADER: 200(OK)
+        /// CONTENT: all styles in the database that contain a particular keychain
+        /// </returns>
+        /// <example>
+        /// GET: api/StyleData/ListStylesForKeychain/1
+        /// </example>
+        /// (collaboration part) 
+        [HttpGet]
+        [ResponseType(typeof(StyleDto))]
+        public IHttpActionResult ListStylesForKeychain(int id)
+        {
+            List<Style> Styles = db.Styles.Where(
+                s=>s.Keychains.Any(
+                    k=>k.KeychainId == id)
+                ).ToList();
+            List<StyleDto> StyleDtos = new List<StyleDto>();
+
+            Styles.ForEach(s => StyleDtos.Add(new StyleDto()
+            {
+                StyleID = s.StyleID,
+                StyleName = s.StyleName
+            }));
+
+            return Ok(StyleDtos);
+        }
+
+
+
+        /// <summary>
+        /// Return All the styles NOT contain a specific keychain
+        /// </summary>
+        /// <param name="id">Keychain primary key</param>
+        /// <returns>
+        /// HEADER: 200(OK)
+        /// CONTENT: all styles in the database that NOT contain a particular keychain
+        /// </returns>
+        /// <example>
+        /// GET: api/StyleData/ListStylesNotIncludeKeychain/1
+        /// </example>
+        /// (collaboration part) 
+        [HttpGet]
+        [ResponseType(typeof(StyleDto))]
+        public IHttpActionResult ListStylesNotIncludeKeychain(int id)
+        {
+            List<Style> Styles = db.Styles.Where(
+                s => !s.Keychains.Any(
+                    k => k.KeychainId == id)
+                ).ToList();
+            List<StyleDto> StyleDtos = new List<StyleDto>();
+
+            Styles.ForEach(s => StyleDtos.Add(new StyleDto()
+            {
+                StyleID = s.StyleID,
+                StyleName = s.StyleName
+            }));
+
+            return Ok(StyleDtos);
+        }
+
+
+
+
         // GET: api/StyleData/FindStyle/2
         [ResponseType(typeof(StyleDto))]
         [HttpGet]

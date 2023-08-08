@@ -21,6 +21,31 @@
         <a href="/Bead/Details/@bead.BeadId"><img src="~/Content/img/beads/@bead.BeadPicture" width="200" /></a>
     }
 </div>
+
+
+<!--Collaboration-->
+<div>
+    <h3>All the styles related to this keychain:</h3>
+    @foreach (var style in Model.associatedStyles)
+    {
+       
+        <a href="/Style/Details/@style.StyleID">@style.StyleName</a>
+        <a style="color:#ab2020; margin:0 1.5em 0 0;" href="/Keychain/UnAssociate/@Model.specificKeychain.KeychainId?StyleID=@style.StyleID">[x]</a>
+    }
+</div>
+<div>
+    <h3>Add this @Model.specificKeychain.KeychainName Keychain to another style:</h3>
+    <form action="/Keychain/Associate/@Model.specificKeychain.KeychainId" method="POST">
+        <select name="StyleID">
+            @foreach (var style in Model.aviliableStyles)
+            {
+                <option value="@style.StyleID">@style.StyleName</option>
+            }
+        </select>
+        <input type="submit" value="Add to Style"/>
+    </form>
+</div>
+
 <style>
     .menuContainer {
         display: flex;
