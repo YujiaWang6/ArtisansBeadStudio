@@ -245,6 +245,7 @@
     <Compile Include="Models\ViewModels\DetailsBeadColour.cs" />
     <Compile Include="Models\ViewModels\DetailsImages.cs" />
     <Compile Include="Models\ViewModels\DetailsKeychain.cs" />
+    <Compile Include="Models\ViewModels\DetailsStyle.cs" />
     <Compile Include="Models\ViewModels\EditImageDto.cs" />
     <Compile Include="Models\ViewModels\NewImageDto.cs" />
     <Compile Include="Models\ViewModels\UpdateBead.cs" />
@@ -335,6 +336,10 @@
     <Content Include="Views\Image\New.cshtml" />
     <Content Include="Views\Style\Details.cshtml" />
     <Content Include="Views\Style\List.cshtml" />
+    <Content Include="Views\Style\New.cshtml" />
+    <Content Include="Views\Style\Edit.cshtml" />
+    <Content Include="Views\Style\Error.cshtml" />
+    <Content Include="Views\Style\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

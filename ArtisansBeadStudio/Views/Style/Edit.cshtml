@@ -1,0 +1,26 @@
+﻿@model ArtisansBeadStudio.Models.ViewModels.DetailsStyle
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+
+<h2>Update Style</h2>
+<a href="/Style/Details/@Model.SelectedStyle.StyleID">Back</a>
+<form action="/Style/Update/@Model.SelectedStyle.StyleID" method="POST">
+    <div>
+        <label>Name:</label> <input type="text" name="StyleName" value="@Model.SelectedStyle.StyleName" />
+    </div>
+    <div>
+        <input type="submit" value="Update Style" />
+    </div>
+</form>
+

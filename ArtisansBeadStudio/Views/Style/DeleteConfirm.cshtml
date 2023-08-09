@@ -1,0 +1,24 @@
+﻿@model ArtisansBeadStudio.Models.StyleDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+<style>
+    body {
+        background-color: blanchedalmond;
+        font-family: monospace;
+    }
+
+    h2 {
+        color: black;
+    }
+</style>
+
+<h2>Are you sure you want to delete this Style?</h2>
+<a href="/Style/Details/@Model.StyleID">Cancel</a>
+<form action="/Style/List/@Model.StyleID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>
+
+
+
+

@@ -1,4 +1,4 @@
-﻿
+﻿@model ArtisansBeadStudio.Models.ViewModels.DetailsStyle
 @{
     ViewBag.Title = "Details";
 }
@@ -12,5 +12,12 @@
         color: black;
     }
 </style>
-<h2>Details</h2>
+<a href="/Style/List/@Model.SelectedStyle.StyleID">Go back to Style-list</a>
+<br />
+<a href="/Style/Edit/@Model.SelectedStyle.StyleID">Update Style</a>
+<br />
+<a style="color:#ab2020;" href="/Style/DeleteConfirm/@Model.SelectedStyle.StyleID">Delete</a>
+<h2>@Model.SelectedStyle.StyleName</h2>
+
+
 

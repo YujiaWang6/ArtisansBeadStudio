@@ -17,12 +17,13 @@
         text-shadow: 1.5px 1.5px white;
     }
 </style>
-
 <h1>List of Styles</h1>
 <br />
 <div>
     @foreach (var style in Model)
     {
-        <h3>@style.StyleName</h3>
+        <h3><a href="/Style/Details/@style.StyleID">@style.StyleName</a></h3>
     }
 </div>
+<br />
+<a href="/Style/New">New Style</a>

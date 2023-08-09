@@ -1,6 +1,8 @@
 ﻿using ArtisansBeadStudio.Models;
+using ArtisansBeadStudio.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -31,72 +33,137 @@ namespace ArtisansBeadStudio.Controllers
         // GET: Style/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            DetailsStyle ViewModel = new DetailsStyle();
+
+            //objective: communicate with our style data api to retrieve one style
+            //curl https://localhost:44316/api/StyleData/FindStyle/{id}
+
+            string url = "StyleData/FindStyle/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            StyleDto SelectedStyle = response.Content.ReadAsAsync<StyleDto>().Result;
+
+            ViewModel.SelectedStyle = SelectedStyle;
+
+            return View(ViewModel);
         }
 
-        // GET: Style/Create
+        // GET: Style/New
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Style/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        // GET: Style/New
+        public ActionResult New()
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(Style style)
+        {
+            string url = "StyleData/AddStyle";
+
+            string jsonpayload = jss.Serialize(style);
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List", new { id = style.StyleID });
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+
+        }
+
+
+        //// POST: Style/Create
+        //[HttpPost]
+        //[Authorize]
+        //public ActionResult Create(Style style)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Style/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            DetailsStyle ViewModel = new DetailsStyle();
+
+            //the existing style information
+            string url = "StyleData/FindStyle/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            StyleDto SelectedStyle = response.Content.ReadAsAsync<StyleDto>().Result;
+            ViewModel.SelectedStyle = SelectedStyle;
+
+            return View(ViewModel);
         }
 
-        // POST: Style/Edit/5
+        // POST: Style/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Style style)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "StyleData/UpdateStyle/" + id;
+            string jsonpayload = jss.Serialize(style);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("Details/" + id);
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
 
         // GET: Style/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "StyleData/FindStyle/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            StyleDto SelectedStyle = response.Content.ReadAsAsync<StyleDto>().Result;
+            return View(SelectedStyle);
         }
+
 
         // POST: Style/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "StyleData/DeleteStyle/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List", new { id = Request.QueryString["StyleID"] });
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

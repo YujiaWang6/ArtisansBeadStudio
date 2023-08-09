@@ -119,9 +119,11 @@ namespace ArtisansBeadStudio.Controllers
 
             return Ok(StyleDto);
         }
-        // PUT: api/StyleData/5
+        // POST: api/StyleData/UpdateStyle/2
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutStyle(int id, Style style)
+        [HttpPost]
+        [Authorize]
+        public IHttpActionResult UpdateStyle(int id, Style style)
         {
             if (!ModelState.IsValid)
             {
@@ -154,9 +156,11 @@ namespace ArtisansBeadStudio.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/StyleData
+        // POST: api/StyleData/AddStyle
         [ResponseType(typeof(Style))]
-        public IHttpActionResult PostStyle(Style style)
+        [HttpPost]
+        [Authorize]
+        public IHttpActionResult AddStyle(Style style)
         {
             if (!ModelState.IsValid)
             {
@@ -169,8 +173,9 @@ namespace ArtisansBeadStudio.Controllers
             return CreatedAtRoute("DefaultApi", new { id = style.StyleID }, style);
         }
 
-        // DELETE: api/StyleData/5
+        // DELETE: api/StyleData/DeleteStyle/5
         [ResponseType(typeof(Style))]
+        [HttpPost]
         public IHttpActionResult DeleteStyle(int id)
         {
             Style style = db.Styles.Find(id);
@@ -182,7 +187,7 @@ namespace ArtisansBeadStudio.Controllers
             db.Styles.Remove(style);
             db.SaveChanges();
 
-            return Ok(style);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
