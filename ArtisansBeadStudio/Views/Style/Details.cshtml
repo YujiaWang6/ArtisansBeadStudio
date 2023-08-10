@@ -17,7 +17,14 @@
 <a href="/Style/Edit/@Model.SelectedStyle.StyleID">Update Style</a>
 <br />
 <a style="color:#ab2020;" href="/Style/DeleteConfirm/@Model.SelectedStyle.StyleID">Delete</a>
-<h2>@Model.SelectedStyle.StyleName</h2>
+<h1>@Model.SelectedStyle.StyleName</h1>
 
+<div>
+    <h2>These keychains belong to @Model.SelectedStyle.StyleName style</h2>
+    @foreach(var keychain in Model.keychainsInStyle)
+            {
+               <h3><a href="/Keychain/Details/@keychain.KeychainId">@keychain.KeychainName</a></h3>
+            }
+</div>
 
 

@@ -174,6 +174,37 @@ namespace ArtisansBeadStudio.Controllers
         }
 
 
+        /// <summary>
+        /// Gather all the keychains related to a particular style
+        /// </summary>
+        /// <param name="id">Style ID (primary key)</param>
+        /// <returns>
+        /// All the keychains in the system that match to a particular style ID
+        /// </returns>
+        /// <example>
+        /// GET: api/keychainData/ListKyechainsForStyle/1
+        /// </example>
+        /// (collaboration part)
+        [HttpGet]
+        [ResponseType(typeof(KeychainDto))]
+        public IHttpActionResult ListKyechainsForStyle(int id)
+        {
+            List<Keychain> Keychains = db.Keychains.Where(
+                k => k.Styles.Any(
+                    s => s.StyleID == id
+                )).ToList();
+            List<KeychainDto> KeychainDtos = new List<KeychainDto>();
+
+            Keychains.ForEach(k => KeychainDtos.Add(new KeychainDto()
+            {
+                KeychainId = k.KeychainId,
+                KeychainName = k.KeychainName
+            }));
+
+
+            return Ok(KeychainDtos);
+        }
+
 
 
         /// <summary>
