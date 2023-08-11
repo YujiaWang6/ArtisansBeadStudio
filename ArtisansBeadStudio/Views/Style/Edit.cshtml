@@ -16,6 +16,9 @@
 <h2>Update Style</h2>
 <a href="/Style/Details/@Model.SelectedStyle.StyleID">Back</a>
 <form action="/Style/Update/@Model.SelectedStyle.StyleID" method="POST">
+    <div style="display:none;">
+        <input type="text" name="StyleID" value="@Model.SelectedStyle.StyleID"/>
+    </div>
     <div>
         <label>Name:</label> <input type="text" name="StyleName" value="@Model.SelectedStyle.StyleName" />
     </div>

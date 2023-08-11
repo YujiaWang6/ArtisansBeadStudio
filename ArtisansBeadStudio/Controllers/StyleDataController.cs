@@ -122,7 +122,7 @@ namespace ArtisansBeadStudio.Controllers
         // POST: api/StyleData/UpdateStyle/2
         [ResponseType(typeof(void))]
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IHttpActionResult UpdateStyle(int id, Style style)
         {
             if (!ModelState.IsValid)
