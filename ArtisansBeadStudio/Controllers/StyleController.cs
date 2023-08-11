@@ -154,11 +154,12 @@ namespace ArtisansBeadStudio.Controllers
             return View(SelectedStyle);
         }
 
-
+        /*
         // POST: Style/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            
             string url = "StyleData/DeleteStyle/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
@@ -173,5 +174,25 @@ namespace ArtisansBeadStudio.Controllers
                 return RedirectToAction("Error");
             }
         }
+        */
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+
+            string url = "StyleData/DeleteStyle/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
     }
 }
