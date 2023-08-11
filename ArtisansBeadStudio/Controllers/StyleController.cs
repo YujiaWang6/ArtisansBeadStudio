@@ -68,6 +68,7 @@ namespace ArtisansBeadStudio.Controllers
             return View();
         }
 
+        /*
         [HttpPost]
         public ActionResult Create(Style style)
         {
@@ -91,6 +92,33 @@ namespace ArtisansBeadStudio.Controllers
 
 
         }
+        */
+
+        [HttpPost]
+        public ActionResult Create(Style style)
+        {
+            string url = "StyleData/AddStyle";
+
+            string jsonpayload = jss.Serialize(style);
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+
+        }
+
+
 
 
         //// POST: Style/Create
