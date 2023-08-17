@@ -7,19 +7,19 @@
 </div>
 <div class="create">
     <h2>Create A Bead</h2>
-    <form action="/Bead/Create" method="POST">
+    <form action="/Bead/Create" method="POST" onsubmit="return validation();">
+        <div id="errormessage" style="color:red;"></div>
         <div>
-            <label>Bead Name:</label>
-            <input name="BeadName" type="text" />
+            <label for="BeadName">Bead Name:</label>
+            <input name="BeadName" type="text" id="BeadName"/>
         </div>
         <div>
-            <label>Bead Description:</label>
-            <input name="BeadDescription" type="text" />
+            <label for="BeadDescription">Bead Description:</label>
+            <input name="BeadDescription" type="text" id="BeadDescription"/>
         </div>
         <div>
-            <label>Bead Colour Id:</label>
-            <select name="ColourId">
-                <option disabled selected>--Choose the colour--</option>
+            <label for="ColourId">Bead Colour Id:</label>
+            <select id="ColourId" name="ColourId">
                 @foreach (var colour in Model)
                 {
                     <option value="@colour.ColourId">@colour.ColourProperty @colour.ColourName</option>
@@ -58,5 +58,41 @@
         font-weight: bold;
     }
 </style>
+<script>
+    function validation() {
+        var errormessage = document.getElementById("errormessage");
+        var BeadName = document.getElementById("BeadName");
+        var BeadDescription = document.getElementById("BeadDescription");
+        var BeadColour = document.getElementById("ColourId");
 
+        if (BeadName.value == "") {
+            BeadName.focus();
+            BeadName.style.backgroundColor = "red";
+            errormessage.innerHTML = "Fill the Bead Name";
+            return false;
+        } else {
+            BeadName.style.backgroundColor = "white";
+        };
+
+
+        if (BeadDescription.value == "") {
+            BeadDescription.focus();
+            BeadDescription.style.backgroundColor = "red";
+            errormessage.innerHTML = "Fill the Bead Descrpition";
+            return false;
+        } else {
+            BeadDescription.style.backgroundColor = "white";
+        };
+
+        if (BeadColour.value == "") {
+            BeadColour.focus();
+            BeadColour.style.backgroundColor = "red";
+            errormessage.innerHTML = "Choose the bead colour";
+            return false;
+        } else {
+            BeadColour.style.backgroundColor = "white";
+        }
+
+    }
+</script>
 

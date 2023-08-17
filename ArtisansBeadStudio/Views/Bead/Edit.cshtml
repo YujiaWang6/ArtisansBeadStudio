@@ -25,7 +25,7 @@
         <div>
 
             <label for="ColourId">Bead Colour Id:</label>
-            <select name="ColourId">
+            <select name="ColourId" id="ColourId">
                 @foreach (var colour in @Model.beadcoloursOptions)
                 {
                     var selected = "";
@@ -80,6 +80,7 @@
         var errormessage = document.getElementById("errormessage");
         var BeadName = document.getElementById("BeadName");
         var BeadDescription = document.getElementById("BeadDescription");
+        var BeadColour = document.getElementById("ColourId");
 
         if (BeadName.value === "") {
             BeadName.focus();

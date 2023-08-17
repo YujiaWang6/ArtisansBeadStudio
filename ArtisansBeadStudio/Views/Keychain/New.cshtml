@@ -8,10 +8,11 @@
 <div class="create">
     <h2>Create a Keychain</h2>
 
-    <form action="/Keychain/Create" method="POST">
+    <form action="/Keychain/Create" method="POST" onsubmit="return validation();">
+        <div id="errormsg" style="color:red;"></div>
         <div>
-            <label>Keychain Name:</label>
-            <input name="KeychainName" type="text" />
+            <label for="KeychainName">Keychain Name:</label>
+            <input name="KeychainName" type="text" id="KeychainName"/>
         </div>
         <div>
             <input type="submit" value="Add A Keychain" id="button" />
@@ -46,3 +47,18 @@
         color: white;
     }
 </style>
+<script>
+    function validation() {
+        var keychainName = document.getElementById("KeychainName");
+        var errorMsg = document.getElementById("errormsg");
+
+        if (keychainName.value == "") {
+            keychainName.focus();
+            keychainName.style.backgroundColor = "red";
+            errorMsg.innerHTML = "Please fill the Keychain Name";
+            return false;
+        } else {
+            keychainName.style.backgroundColor = "white";
+        }
+    }
+</script>

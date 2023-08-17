@@ -8,14 +8,15 @@
 <div class="create">
     <h2>Update Keychain</h2>
 
-    <form action="/Keychain/Update/@Model.KeychainId" method="POST">
+    <form action="/Keychain/Update/@Model.KeychainId" method="POST" onsubmit="return validation();">
         <div style="display:none;">
             @* Pass through the bead ID *@
             <input type="text" name="KeychainId" value="@Model.KeychainId" />
         </div>
+        <div id="errormsg" style="color:red;"></div>
         <div>
-            <label>Keychain Name:</label>
-            <input name="KeychainName" type="text" value="@Model.KeychainName" />
+            <label for="KeychainName">Keychain Name:</label>
+            <input name="KeychainName" type="text" value="@Model.KeychainName" id="KeychainName"/>
         </div>
         <div>
             <input type="submit" value="Update Keychain" id="button" />
@@ -51,3 +52,18 @@
         font-weight: bold;
     }
 </style>
+<script>
+    function validation() {
+        var keychainName = document.getElementById("KeychainName");
+        var errorMsg = document.getElementById("errormsg");
+
+        if (keychainName.value == "") {
+            keychainName.focus();
+            keychainName.style.backgroundColor = "red";
+            errorMsg.innerHTML = "Please fill the Keychain Name";
+            return false;
+        } else {
+            keychainName.style.backgroundColor = "white";
+        }
+    }
+</script>

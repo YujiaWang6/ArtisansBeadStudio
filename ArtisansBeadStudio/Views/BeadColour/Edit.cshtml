@@ -9,14 +9,15 @@
 <div class="create">
     <h2>Update Bead Colour</h2>
 
-    <form action="/BeadColour/Update/@Model.ColourId" method="POST">
+    <form action="/BeadColour/Update/@Model.ColourId" method="POST" onsubmit="return validation();">
         <div style="display:none;">
             @* Pass through the bead ID *@
             <input type="text" name="ColourId" value="@Model.ColourId" />
         </div>
+        <div id="errormsg" style="color:red;"></div>
         <div>
-            <label>Colour Name:</label>
-            <input name="ColourName" type="text" value="@Model.ColourName" />
+            <label for="ColourName">Colour Name:</label>
+            <input name="ColourName" type="text" value="@Model.ColourName" id="ColourName"/>
         </div>
         <div>
             <label>Colour Property:</label>
@@ -59,3 +60,31 @@
     }
 </style>
 
+<script>
+    function validation() {
+        var ColourName = document.getElementById("ColourName");
+        var solidColour = document.getElementById("Solid");
+        var transparentColour = document.getElementById("Transparent");
+        var errormessage = document.getElementById("errormsg");
+
+        if (ColourName.value == "") {
+            ColourName.focus();
+            ColourName.style.backgroundColor = "red";
+            errormessage.innerHTML = "Fill the Colour Name";
+            return false;
+        } else {
+            ColourName.style.backgroundColor = "white";
+        };
+
+        var colorPropertyChecked = false;
+        if (solidColour.checked || transparentColour.checked) {
+            colorPropertyChecked = true;
+        }
+
+        if (!colorPropertyChecked) {
+            errormessage.innerHTML = "Choose the Colour Property";
+            return false;
+        }
+
+    }
+</script>
