@@ -47,7 +47,7 @@ namespace ArtisansBeadStudio.Controllers
 
             //showing all the keychains under this style
             //collaboration part
-            url = "keychainData/ListKyechainsForStyle/" + id;
+            url = "keychainData/ListKeychainsForStyle/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<KeychainDto> keychainsInStyle = response.Content.ReadAsAsync<IEnumerable<KeychainDto>>().Result;
             ViewModel.keychainsInStyle = keychainsInStyle;

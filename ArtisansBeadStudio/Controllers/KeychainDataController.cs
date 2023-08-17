@@ -182,12 +182,12 @@ namespace ArtisansBeadStudio.Controllers
         /// All the keychains in the system that match to a particular style ID
         /// </returns>
         /// <example>
-        /// GET: api/keychainData/ListKyechainsForStyle/1
+        /// GET: api/keychainData/ListKeychainsForStyle/1
         /// </example>
         /// (collaboration part)
         [HttpGet]
         [ResponseType(typeof(KeychainDto))]
-        public IHttpActionResult ListKyechainsForStyle(int id)
+        public IHttpActionResult ListKeychainsForStyle(int id)
         {
             List<Keychain> Keychains = db.Keychains.Where(
                 k => k.Styles.Any(
