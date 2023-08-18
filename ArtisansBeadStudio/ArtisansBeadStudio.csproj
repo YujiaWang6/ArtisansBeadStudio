@@ -231,6 +231,10 @@
     <Compile Include="Migrations\202308072237039_keychains-styles.designer.cs">
       <DependentUpon>202308072237039_keychains-styles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308172330452_Keychain-Users.cs" />
+    <Compile Include="Migrations\202308172330452_Keychain-Users.designer.cs">
+      <DependentUpon>202308172330452_Keychain-Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -382,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308072237039_keychains-styles.resx">
       <DependentUpon>202308072237039_keychains-styles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308172330452_Keychain-Users.resx">
+      <DependentUpon>202308172330452_Keychain-Users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

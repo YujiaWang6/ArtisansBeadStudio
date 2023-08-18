@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArtisansBeadStudio.Models
 {
@@ -18,12 +19,18 @@ namespace ArtisansBeadStudio.Models
 
         //A keychain can have many styles
         public ICollection<Style> Styles { get; set; }
+
+        //Create another column for the user
+        [ForeignKey("ApplicationUser")]
+        public string UserID { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 
     public class KeychainDto
     {
         public int KeychainId { get; set; }
         public string KeychainName { get; set; }
+        public string UserID { get; set; }
     }
 
 }

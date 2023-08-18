@@ -13,6 +13,10 @@
             @* Pass through the bead ID *@
             <input type="text" name="KeychainId" value="@Model.KeychainId" />
         </div>
+        <div style="display:none;">
+            @* Pass through the user ID *@
+            <input type="text" name="UserID" value="@Model.UserID"/>
+        </div>
         <div id="errormsg" style="color:red;"></div>
         <div>
             <label for="KeychainName">Keychain Name:</label>

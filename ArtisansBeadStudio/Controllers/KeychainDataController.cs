@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ArtisansBeadStudio.Migrations;
 using ArtisansBeadStudio.Models;
+using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace ArtisansBeadStudio.Controllers
 {
@@ -29,9 +31,19 @@ namespace ArtisansBeadStudio.Controllers
         /// </example>
         [HttpGet]
         [ResponseType(typeof(KeychainDto))]
+        [Authorize(Roles ="Admin,Guest")]
         public IHttpActionResult ListKeychains()
         {
-            List<Keychain> Keychains = db.Keychains.ToList();
+            bool isAdmin = User.IsInRole("Admin");
+
+            //set the admin can see all the keychains, and guest users can only see their own
+            List<Keychain> Keychains; 
+            if(isAdmin) Keychains = db.Keychains.ToList();
+            else
+            {
+                string UserId = User.Identity.GetUserId();
+                Keychains = db.Keychains.Where(k => k.UserID== UserId).ToList();
+            }
             List<KeychainDto> KeychainDtos = new List<KeychainDto>();
 
             Keychains.ForEach(k => KeychainDtos.Add(new KeychainDto()
@@ -219,6 +231,7 @@ namespace ArtisansBeadStudio.Controllers
         /// </example> 
         [HttpGet]
         [ResponseType(typeof(Keychain))]
+        [Authorize(Roles ="Admin,Guest")]
         public IHttpActionResult FindKeychain(int id)
         {
             Keychain Keychain = db.Keychains.Find(id);
@@ -232,6 +245,10 @@ namespace ArtisansBeadStudio.Controllers
             {
                 return NotFound();
             }
+
+            //not process if the user is not admin and the keychain doesn't belong to that user
+            bool isAdmin = User.IsInRole("Admin");
+            if(!isAdmin && (Keychain.UserID!=User.Identity.GetUserId())) return StatusCode(HttpStatusCode.Forbidden);
 
             return Ok(KeychainDto);
         }
@@ -263,7 +280,7 @@ namespace ArtisansBeadStudio.Controllers
         // PUT: api/KeychainData/UpdateKeychain/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles ="Admin,Guest")]
         public IHttpActionResult UpdateKeychain(int id, Keychain keychain)
         {
             if (!ModelState.IsValid)
@@ -276,7 +293,16 @@ namespace ArtisansBeadStudio.Controllers
                 return BadRequest();
             }
 
+            //check the admin status, not process if the user is not an admin, and if the keychain is not belonging to that user
+            bool isAdmin = User.IsInRole("Admin");
+            
+            if (!isAdmin && (keychain.UserID != User.Identity.GetUserId()))
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+
             db.Entry(keychain).State = EntityState.Modified;
+            db.Entry(keychain).Property(k => k.UserID).IsModified = false;
 
             try
             {
@@ -320,13 +346,17 @@ namespace ArtisansBeadStudio.Controllers
         /// RETURN:{"KeychainId":3,"KeychainName":"Cat","Beads":null}
         /// </example>
         [ResponseType(typeof(Keychain))]
-        [Authorize]
+        [HttpPost]
+        [Authorize(Roles ="Admin,Guest")]
         public IHttpActionResult AddKeychain(Keychain keychain)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            //attach the id
+            keychain.UserID = User.Identity.GetUserId();
 
             db.Keychains.Add(keychain);
             db.SaveChanges();
@@ -351,7 +381,7 @@ namespace ArtisansBeadStudio.Controllers
         /// </example>
         [HttpPost]
         [ResponseType(typeof(Keychain))]
-        [Authorize]
+        [Authorize(Roles ="Admin,Guest")]
         public IHttpActionResult DeleteKeychain(int id)
         {
             Keychain keychain = db.Keychains.Find(id);
@@ -359,6 +389,9 @@ namespace ArtisansBeadStudio.Controllers
             {
                 return NotFound();
             }
+
+            bool isAdmin = User.IsInRole("Admin");
+            if (!isAdmin && (keychain.UserID != User.Identity.GetUserId())) return StatusCode(HttpStatusCode.Forbidden);
 
             db.Keychains.Remove(keychain);
             db.SaveChanges();

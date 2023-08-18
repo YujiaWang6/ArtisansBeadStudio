@@ -58,8 +58,10 @@ namespace ArtisansBeadStudio.Controllers
         /// <example>
         /// GET: Keychain/List
         /// </example>
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult List()
         {
+            GetApplicationCookie();
             string url = "KeychainData/ListKeychains";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<KeychainDto> keychains = response.Content.ReadAsAsync<IEnumerable<KeychainDto>>().Result;
@@ -76,8 +78,10 @@ namespace ArtisansBeadStudio.Controllers
         ///<example>
         /// GET: Keychain/Details/{id}
         /// </example>
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult Details(int id)
         {
+            GetApplicationCookie();
             DetailsKeychain ViewModels = new DetailsKeychain();
 
             string url = "KeychainData/FindKeychain/" + id;
@@ -110,20 +114,31 @@ namespace ArtisansBeadStudio.Controllers
 
         //POST: Keychain/Associate/{id}
         [HttpPost]
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult Associate(int id, int styleid)
         {
+            //get token to check the authorization
+            GetApplicationCookie();
             string url = "KeychainData/AssociateKeychainWithStyle/" + id + "/" + styleid;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
-
-            return RedirectToAction("Details/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Details/" + id);
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
-        //Get: Keychain/Associate/{id}?StyleID={styleid}
+        //Get: Keychain/UnAssociate/{id}?StyleID={styleid}
         [HttpGet]
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult UnAssociate(int id, int styleid)
         {
+            GetApplicationCookie();
             string url = "KeychainData/RemoveKeychainWithStyle/"+id+"/"+styleid;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
@@ -139,7 +154,7 @@ namespace ArtisansBeadStudio.Controllers
         /// </summary>
         /// <returns>Send collected data to Create Method</returns>
         /// GET: Keychain/Create
-        [Authorize]
+        [Authorize(Roles = "Admin,Guest")]
         public ActionResult New()
         {
             return View();
@@ -156,7 +171,7 @@ namespace ArtisansBeadStudio.Controllers
         /// </returns>
         /// POST: Keychain/Create
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult Create(Keychain keychain)
         {
             GetApplicationCookie();
@@ -194,7 +209,7 @@ namespace ArtisansBeadStudio.Controllers
         /// <param name="id">The specific keychain primary key</param>
         /// <returns>Send collected data to Update Method</returns>
         /// GET: Keychain/Edit/{id}
-        [Authorize]
+        [Authorize(Roles = "Admin,Guest")]
         public ActionResult Edit(int id)
         {
             string url = "KeychainData/FindKeychain/" + id;
@@ -215,13 +230,13 @@ namespace ArtisansBeadStudio.Controllers
         /// </returns>
         /// POST: Keychain/Update/{id}
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin,Guest")]
         public ActionResult Update(int id, Keychain keychain)
         {
             GetApplicationCookie();
             string url = "KeychainData/UpdateKeychain/" + id;
             string jsonpayload = jss.Serialize(keychain);
-
+            Debug.WriteLine("json payload:" + jsonpayload);
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
@@ -264,7 +279,7 @@ namespace ArtisansBeadStudio.Controllers
         /// </returns>
         /// POST: Keychain/Delete/{id}
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles ="Admin,Guest")]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();
