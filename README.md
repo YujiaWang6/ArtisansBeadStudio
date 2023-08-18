@@ -11,7 +11,25 @@ There are several extra functions for this collaboration project.
 - Also, inside the style page, users can see all the keychains link to that specific style.
 - Beside that, the authetication is used for differentiating the Admin user and the Guest users. The Admin user can manage all the keychains created online, while the Guest users can only manage the keychains created by their own.  
 
+## Installation
+1. Clone the repository from GitHub:
+   ```
+   git clone https://github.com/YujiaWang6/ArtisansBeadStudio.git
+   ```
+2. Update the local database:
+   - Create a ```App_Data``` folder inside your local ArtisansBeadStudio folder
+   - Run update the database command
+   ```
+   Tools > Nuget Package Manager > Package Manage Console > Update-Database
+   ```
+   - Check if the database is created:
+   ```
+   View > SQL Server Object Explorer > MSSQLLocalDb >...
+   ```
+3. Set up the Admin and Guest role
+   - Register an account
+   - View > SQL Server Object Explorer
+   - Create 'Guest', 'Admin' entries in AspNetRoles
+   - Copy UserID from AspNetUsers table
+   - Create entry between Guest Role x User Id, Admin Role x User Id in AspNetUserRoles bridging table
 
-
-## Showcase video
-Here is the link to the [showcase video](https://www.youtube.com/watch?v=P_AozuE1GIU&ab_channel=Helennn_W) which including the functions of the website!
