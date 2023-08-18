@@ -32,4 +32,5 @@ There are several extra functions for this collaboration project.
    - Create 'Guest', 'Admin' entries in AspNetRoles
    - Copy UserID from AspNetUsers table
    - Create entry between Guest Role x User Id, Admin Role x User Id in AspNetUserRoles bridging table
+4. Now you are ready to use the website and create some data by your own!
 
