@@ -9,7 +9,24 @@ The Bead Keychain Design Platform is the Web app could replace the bead design b
 There are several extra functions for this collaboration project.
 - It allows users to associate/unassociate styles (from Art Gallary) to a keychain (from Bead Keychain Design Platform).
 - Also, inside the style page, users can see all the keychains link to that specific style.
-- Beside that, the authetication is used for differentiating the Admin user and the Guest users. The Admin user can manage all the keychains created online, while the Guest users can only manage the keychains created by their own.  
+- Beside that, the authetication is used for differentiating the Admin user and the Guest users. The Admin user can manage all the keychains created online, while the Guest users can only manage the keychains created by their own.
+
+## Build Status 👾
+The current status is that there is CRUD Functionality for all the Tables in our project.
+- CRUD (Create, Read, Update & Delete) for Bead.✅
+- CRUD (Create, Read, Update & Delete) for BeadColour.✅
+- CRUD (Create, Read, Update & Delete) for Image.✅
+- CRUD (Create, Read, Update & Delete) for Keychain.✅
+- CRUD (Create, Read, Update & Delete) for Style.✅
+- CR (Create, Read) for Album.
+
+## Tech/Framework 💻
+- ASP.NET MVC: Utilize the Model-View-Controller (MVC) architectural pattern for building the web application.
+- Entity Framework: Use Entity Framework with a Code-First approach for managing the database schema and migrations.
+- Web API: Create Web API controllers to handle data retrieval and manipulation, facilitating collaboration between the projects.
+- Razor Views: Design Razor views (.cshtml files) to generate dynamic HTML content for displaying data to users.
+- Collaboration: Establish a connection between the "styles" table from the art gallery project and the "keychain" table from the bead-making project, allowing seamless exploration of keychains by style and vice versa.
+- Migration: Implement database migrations to manage and update the database schema as the project evolves.
 
 ## Installation
 1. Clone the repository from GitHub:
